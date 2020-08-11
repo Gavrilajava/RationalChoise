@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_08_10_205636) do
 
   create_table "values", force: :cascade do |t|
     t.integer "item_id"
-    t.integer "criteria_id"
+    t.integer "criterium_id"
     t.string "value"
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
