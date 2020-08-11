@@ -1,5 +1,5 @@
 # RationalChoise
-The web app to organize recipes and make a grocery list out of it. This project was made as a capstone project for Flatiron Programming Bootcamp for incomplete three weeks and should demonstrate my perfect knowlege of learned web technologies.
+The web app to compare things by several criteria. 
 
 
 ## Built With
