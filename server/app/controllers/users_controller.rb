@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_action :logged_in?, only: [:create]
+  skip_before_action :logged_in?, only: [:create, :random_name]
 
 
   def create
@@ -11,6 +11,10 @@ class UsersController < ApplicationController
     else
       render json: {error: "Failed to create a user"}, status: :not_acceptable
     end
+  end
+
+  def random_name
+    render json: {name: User.get_random_name}, status: :ok
   end
 
 

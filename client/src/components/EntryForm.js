@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container'
 import SignUpForm from './SignUpForm'
 import LoginForm from './LoginForm'
+import RandomUser from './RandomUser'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -83,7 +84,7 @@ const EntryForm = () => {
           <SignUpForm/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          <RandomUser/>
         </TabPanel>
       </SwipeableViews>
     </Container>
