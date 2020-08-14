@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {connect} from 'react-redux'
-import { API_ROOT, HEADERS } from '../constants/api';
+import { API_ROOT, get_headers } from '../constants/api';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +31,7 @@ const SignUpForm = ({logIn}) => {
     if (password === confirmPassword && password.length){
       fetch(API_ROOT+'/users',{
         method: "POST",
-        headers: HEADERS,
+        headers: get_headers(),
         body: JSON.stringify({name, password})
       })
         .then(res => res.json())

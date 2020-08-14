@@ -10,6 +10,7 @@ import Navbar from './components/Navbar'
 const App = ({user, logOut}) => {
 
 
+
   return (
     !user ? 
       <EntryForm/>

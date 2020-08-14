@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import { API_ROOT, HEADERS } from '../constants/api';
+import { API_ROOT, get_headers } from '../constants/api';
 import {connect} from 'react-redux'
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
-const RandomUser = ({logIn}) => {
+const RandomUser = ({state, logIn}) => {
 
   const [name, changeName] = useState(null)
 
@@ -24,16 +24,19 @@ const RandomUser = ({logIn}) => {
   const signUp = () => {
     fetch(API_ROOT+'/users',{
       method: "POST",
-      headers: HEADERS,
+      headers: get_headers(),
       body: JSON.stringify({name, password})
     })
       .then(res => res.json())
       .then(userInfo => {
+        debugger
         if (userInfo.token){
           logIn(userInfo)
         }
       })
   }
+
+  console.log(state)
 
   return(
     name ?
@@ -65,7 +68,10 @@ const RandomUser = ({logIn}) => {
 }
 
 const mapStateToProps = (state) => {
-  return {user: state.UserReducer.user}
+  return {
+    state: state,
+    user: state.UserReducer.user
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {

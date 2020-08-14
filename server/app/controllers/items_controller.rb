@@ -37,7 +37,7 @@ class ItemsController < ApplicationController
   end
 
   def strong_params
-    params.require(:item).permit(:name)
+    params.require(:item).permit(:name, :comparsion_id)
   end
 
 end

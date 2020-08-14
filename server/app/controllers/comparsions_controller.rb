@@ -7,7 +7,7 @@ class ComparsionsController < ApplicationController
   end
 
   def create
-    comparsion = Comparsion.new(strong_params)
+    comparsion = Comparsion.new(strong_params.merge({user: @user}))
     if comparsion.save
       render json: comparsion, status: :created
     else
@@ -35,7 +35,11 @@ class ComparsionsController < ApplicationController
 
   def show
     if @comparsion
-      render json: @comparsion.to_frontend, status: :ok
+      if @comparsion.user == @user
+        render json: Comparsion.to_frontend(@comparsion.id), status: :ok
+      else
+        render json: {error: "you are not autorized to compare this"}, status: :not_acceptable
+      end
     else
       render json: {error: "can't find comparsion with id " + params[:id]}, status: :not_acceptable
     end
@@ -45,7 +49,7 @@ class ComparsionsController < ApplicationController
   private
 
   def get_comparsion
-    @comparsion = Comparsion.find(params[:id])
+    @comparsion = Comparsion.find_by(id: params[:id], user: @user)
   end
 
   def strong_params

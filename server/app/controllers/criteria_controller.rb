@@ -37,6 +37,6 @@ class CriteriaController < ApplicationController
   end
 
   def strong_params
-    params.require(:criterium).permit(:name, :weight)
+    params.require(:criterium).permit(:name, :weight, :comparsion_id)
   end
 end

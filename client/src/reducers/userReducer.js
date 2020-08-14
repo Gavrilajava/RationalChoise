@@ -18,12 +18,6 @@ export default function UserReducer(state = initialUser(),action){
               ...state,
               user: action.auth.user
           }
-      case "logout":
-          localStorage.clear()
-          return{
-              ...state,
-              user: false
-          }
 
       default: 
           return state

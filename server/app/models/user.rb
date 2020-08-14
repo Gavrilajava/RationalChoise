@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_secure_password
   
   def comparsion_names
-    self.comparsions.pluck(:name)
+    self.comparsions.pluck(:name, :id)
   end
 
   def self.get_random_name

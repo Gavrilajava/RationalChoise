@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Navbar = ({user, logOut}) => {
+const Navbar = ({user, logOut, activeComparsion}) => {
 
   const styles = useStyles()
 
@@ -32,7 +32,7 @@ const Navbar = ({user, logOut}) => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" className={styles.title}>
-          News
+          {activeComparsion ? activeComparsion[0] : null}
         </Typography>
         <Button onClick = {logOut} color="inherit">{user}</Button>
       </Toolbar>
@@ -43,7 +43,7 @@ const Navbar = ({user, logOut}) => {
 
 
 const mapStateToProps = (state) => {
-  return {user: state.UserReducer.user}
+  return {user: state.UserReducer.user, activeComparsion: state.ComparsionReducer.activeComparsion}
 }
 
 const mapDispatchToProps = (dispatch) => {
