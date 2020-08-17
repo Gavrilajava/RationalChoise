@@ -1,87 +1,84 @@
-import React, {useState} from 'react'
-import { useHistory } from 'react-router-dom';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import { makeStyles } from '@material-ui/core/styles';
-import {connect} from 'react-redux'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { useHistory } from 'react-router-dom'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import { makeStyles } from '@material-ui/core/styles'
+import { connect } from 'react-redux'
 import AddItem from './AddItem'
 import AddCriterium from './AddCriterium'
 import Header from './Header'
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(2)
   },
   title: {
     flexGrow: 1,
     width: '300px'
-   
+
   },
   input: {
     width: '300px'
-  },
+  }
 
+}))
 
-}));
-
-
-const Navbar = ({user, logOut, activeComparsion, changeComparsion, comparsions, setActiveComparsion}) => {
-
+const Navbar = ({ user, logOut, activeComparsion, changeComparsion, comparsions, setActiveComparsion }) => {
   const styles = useStyles()
 
-  const [userMenuAnchor, setUserMenuAnchor] = useState(null);
+  const [userMenuAnchor, setUserMenuAnchor] = useState(null)
 
-  const [comparsionMenuAnchor, setComparsionMenuAnchor] = useState(null);
+  const [comparsionMenuAnchor, setComparsionMenuAnchor] = useState(null)
 
   const history = useHistory()
 
   const showUserMenu = e => {
-    setUserMenuAnchor(e.currentTarget);
-  };
+    setUserMenuAnchor(e.currentTarget)
+  }
 
   const hideUserMenu = () => {
-    setUserMenuAnchor(null);
-  };
+    setUserMenuAnchor(null)
+  }
 
   const showComparsionMenu = e => {
-    setComparsionMenuAnchor(e.currentTarget);
-  };
+    setComparsionMenuAnchor(e.currentTarget)
+  }
 
   const hideComparsionMenu = () => {
-    setComparsionMenuAnchor(null);
-  };
+    setComparsionMenuAnchor(null)
+  }
 
-  const redirect = c => {
+  const redirectToComparsion = c => {
     hideComparsionMenu()
     setActiveComparsion(c)
     history.push(`/comparsions/${c[1]}`)
   }
 
-  const redirect_to = path => {
+  const redirectToUrl = path => {
     hideComparsionMenu()
     hideUserMenu()
     history.push(path)
   }
 
-
-  return(
+  return (
     <AppBar position="static">
       <Toolbar>
-        <IconButton 
-          edge="start" 
-          className={styles.menuButton} 
-          color="inherit" 
-          aria-label="comparsions-menu" 
-          aria-haspopup="true" 
+        <IconButton
+          edge="start"
+          className={styles.menuButton}
+          color="inherit"
+          aria-label="comparsions-menu"
+          aria-haspopup="true"
           onClick={showComparsionMenu}
         >
           <MenuIcon />
@@ -93,31 +90,28 @@ const Navbar = ({user, logOut, activeComparsion, changeComparsion, comparsions, 
           open={Boolean(comparsionMenuAnchor)}
           onClose={hideComparsionMenu}
         >
-          {comparsions.map(c => <MenuItem key = {`menu${c[1]}`} onClick={() => redirect(c)}>{c[0]}</MenuItem>)}
-          <MenuItem key ="new comparsion" onClick={() => redirect_to('/create')}>New Comparsion</MenuItem>
-          
+          {comparsions.map(c => <MenuItem key = {`menu${c[1]}`} onClick={() => redirectToComparsion(c)}>{c[0]}</MenuItem>)}
+          <MenuItem key ="new comparsion" onClick={() => redirectToUrl('/create')}>New Comparsion</MenuItem>
+
         </Menu>
         <Typography variant="h6" className={styles.title}>
-          {activeComparsion ? 
-            <Header
+          {activeComparsion
+            ? <Header
               key = {activeComparsion[0]}
-              item = {{name: activeComparsion[0], id: activeComparsion[1]}}
+              item = {{ name: activeComparsion[0], id: activeComparsion[1] }}
               change = {changeComparsion}
-              api_path = '/comparsions/'
+              apiPath = '/comparsions/'
               title = "Comparsion"
               className={styles.input}
             />
-          : 
-            null}
+            : null}
         </Typography>
-        { activeComparsion 
-          ?
-            <>
-              <AddItem/>
-              <AddCriterium/>
-            </>
-          : 
-            null
+        { activeComparsion
+          ? <>
+            <AddItem/>
+            <AddCriterium/>
+          </>
+          : null
         }
         <Button aria-controls="user-menu" aria-haspopup="true" color="inherit" onClick={showUserMenu}>{user}</Button>
         <Menu
@@ -127,7 +121,7 @@ const Navbar = ({user, logOut, activeComparsion, changeComparsion, comparsions, 
           open={Boolean(userMenuAnchor)}
           onClose={hideUserMenu}
         >
-          <MenuItem onClick={() => redirect_to('/user')}>My account</MenuItem>
+          <MenuItem onClick={() => redirectToUrl('/user')}>My account</MenuItem>
           <MenuItem onClick={logOut}>Logout</MenuItem>
         </Menu>
       </Toolbar>
@@ -135,11 +129,9 @@ const Navbar = ({user, logOut, activeComparsion, changeComparsion, comparsions, 
   )
 }
 
-
-
 const mapStateToProps = (state) => {
   return {
-    user: state.UserReducer.user, 
+    user: state.UserReducer.user,
     activeComparsion: state.ComparsionReducer.activeComparsion,
     comparsions: state.ComparsionReducer.comparsions
   }
@@ -147,11 +139,19 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logOut: (() => dispatch({type: "logout"})),
-    changeComparsion: ((comparsion) => dispatch({type: "changeComparsion", comparsion: comparsion})),
-    setActiveComparsion: ((activeComparsion) => dispatch({type: "setActiveComparsion", activeComparsion: activeComparsion})) 
+    logOut: () => dispatch({ type: 'logout' }),
+    changeComparsion: (comparsion) => dispatch({ type: 'changeComparsion', comparsion: comparsion }),
+    setActiveComparsion: (activeComparsion) => dispatch({ type: 'setActiveComparsion', activeComparsion: activeComparsion })
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+Navbar.propTypes = {
+  user: PropTypes.string.isRequired,
+  logOut: PropTypes.func.isRequired,
+  activeComparsion: PropTypes.array,
+  changeComparsion: PropTypes.func.isRequired,
+  comparsions: PropTypes.array,
+  setActiveComparsion: PropTypes.func.isRequired
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

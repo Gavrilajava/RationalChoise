@@ -1,73 +1,66 @@
-import React, {useRef} from 'react'
+import React, { useRef } from 'react'
+import PropTypes from 'prop-types'
 import ContentEditable from 'react-contenteditable'
-import { API_ROOT, get_headers, throwError } from '../constants/api'
-import {connect} from 'react-redux'
+import { API_ROOT, getHeaders, throwError } from '../constants/api'
+import { connect } from 'react-redux'
 
-
-const Value = ({item_id, criterium_id, value={value: 'Add Value!'}, StyledTableCell, addNewValue}) => {
-
-
-  const text = useRef(value.value);
+const Value = ({ itemId, criteriumId, value = { value: 'Add Value!' }, StyledTableCell, addNewValue }) => {
+  const text = useRef(value.value)
 
   const handleChange = e => {
-      text.current = e.target.value;
-      if (text.current === ''){
-        text.current = 'Add Value!'
-      }
-  };
+    text.current = e.target.value
+    if (text.current === '') {
+      text.current = 'Add Value!'
+    }
+  }
 
   const handleBlur = e => {
-      e.target.innerText = text.current
+    e.target.innerText = text.current
 
-      fetch(API_ROOT + '/values', {
-        method: "POST",
-        headers: get_headers(),
-        body: JSON.stringify({
-          item_id,
-          criterium_id,
-          value: text.current
-        })
+    fetch(API_ROOT + '/values', {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify({
+        item_id: itemId,
+        criterium_id: criteriumId,
+        value: text.current
       })
+    })
       .then(resp => resp.ok ? resp.json() : throwError(resp.status))
       .then(json => {
-
         addNewValue(json)
       })
-  };
+  }
 
   const handleFocus = e => {
-    if (text.current === 'Add Value!'){
+    if (text.current === 'Add Value!') {
       e.target.innerText = ''
     }
   }
 
-
   const handleKeyDown = e => {
-    if (e.keyCode === 13){
+    if (e.keyCode === 13) {
       e.target.blur()
     }
   }
 
-
-
-
-  return(
-    <StyledTableCell 
+  return (
+    <StyledTableCell
       align="right"
-      key = {`cell${item_id}Х${criterium_id}`} 
+      key = {`cell${itemId}Х${criteriumId}`}
     >
-      <ContentEditable 
-        html={text.current} 
-        onBlur={handleBlur} 
+      <ContentEditable
+        html={text.current}
+        onBlur={handleBlur}
         onChange={handleChange}
         onFocus={handleFocus}
         onKeyDown = {handleKeyDown}
-        style = {isNaN(text.current) ?  {'color': "red"} : {}  }
+        style = {isNaN(text.current) ? { color: 'red' } : {} }
       />
     </StyledTableCell>
 
   )
-} 
+}
 
 const mapStateToProps = () => {
   return {}
@@ -75,10 +68,16 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addNewValue: ((value) => dispatch({type: "addNewValue", value: value})) 
+    addNewValue: (value) => dispatch({ type: 'addNewValue', value: value })
   }
 }
 
+Value.propTypes = {
+  itemId: PropTypes.number.isRequired,
+  criteriumId: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
+  addNewValue: PropTypes.func.isRequired,
+  StyledTableCell: PropTypes.element.isRequired
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(Value)
-
-
