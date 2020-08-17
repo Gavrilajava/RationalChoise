@@ -33,12 +33,9 @@ const RandomUser = ({state, logIn}) => {
           logIn(userInfo)
         }
       })
-      .catch(e => {
-        debugger
-      })
+
   }
 
-  console.log(state)
 
   return(
     name ?

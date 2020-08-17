@@ -66,13 +66,12 @@ const Navbar = ({user, logOut, activeComparsion, changeComparsion, comparsions, 
     history.push(`/comparsions/${c[1]}`)
   }
 
-  const redirect_to_create = () => {
+  const redirect_to = path => {
     hideComparsionMenu()
-    history.push('/create')
+    hideUserMenu()
+    history.push(path)
   }
 
-
-  console.log(activeComparsion)
 
   return(
     <AppBar position="static">
@@ -95,7 +94,7 @@ const Navbar = ({user, logOut, activeComparsion, changeComparsion, comparsions, 
           onClose={hideComparsionMenu}
         >
           {comparsions.map(c => <MenuItem key = {`menu${c[1]}`} onClick={() => redirect(c)}>{c[0]}</MenuItem>)}
-          <MenuItem key ="new comparsion" onClick={redirect_to_create}>New Comparsion</MenuItem>
+          <MenuItem key ="new comparsion" onClick={() => redirect_to('/create')}>New Comparsion</MenuItem>
           
         </Menu>
         <Typography variant="h6" className={styles.title}>
@@ -128,7 +127,7 @@ const Navbar = ({user, logOut, activeComparsion, changeComparsion, comparsions, 
           open={Boolean(userMenuAnchor)}
           onClose={hideUserMenu}
         >
-          <MenuItem onClick={() => history.push('/user')}>My account</MenuItem>
+          <MenuItem onClick={() => redirect_to('/user')}>My account</MenuItem>
           <MenuItem onClick={logOut}>Logout</MenuItem>
         </Menu>
       </Toolbar>
