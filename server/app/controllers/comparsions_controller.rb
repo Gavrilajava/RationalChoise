@@ -26,8 +26,8 @@ class ComparsionsController < ApplicationController
 
   def update
     if @comparsion
-      @comparsion.update(strong_params)
-      render json: comparsion, status: :ok
+      @comparsion.update(name: params[:name])
+      render json: @comparsion, status: :ok
     else
       render json: {error: "can't find comparsion with id " + params[:id]}, status: :not_acceptable
     end
@@ -36,7 +36,7 @@ class ComparsionsController < ApplicationController
   def show
     if @comparsion
       if @comparsion.user == @user
-        render json: Comparsion.to_frontend(@comparsion.id), status: :ok
+        render json: @comparsion.to_frontend, status: :ok
       else
         render json: {error: "you are not autorized to compare this"}, status: :not_acceptable
       end

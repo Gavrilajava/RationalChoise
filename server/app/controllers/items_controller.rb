@@ -23,8 +23,8 @@ class ItemsController < ApplicationController
 
   def update
     if @item
-      @item.update(strong_params)
-      render json: item, status: :ok
+      @item.update(name: params[:name])
+      render json: @item, status: :ok
     else
       render json: {error: "can't find item with id " + params[:id]}, status: :not_acceptable
     end

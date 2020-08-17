@@ -1,13 +1,9 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import {connect} from 'react-redux'
 import { API_ROOT, get_headers } from '../constants/api';
 
 const AddItem = ({comparsionDetails, addNewItem}) => {
-
-  const [editable, setEditable] = useState(false)
-  const [name, setName] = useState("")
 
   const toggleClick = () => {
     const comparsion_id = comparsionDetails.id
@@ -15,7 +11,7 @@ const AddItem = ({comparsionDetails, addNewItem}) => {
       method: "POST",
       headers: get_headers(),
       body: JSON.stringify({
-        name, 
+        name: `Item#${comparsionDetails.items.length + 1}`, 
         comparsion_id
       })
     })
@@ -24,32 +20,13 @@ const AddItem = ({comparsionDetails, addNewItem}) => {
   }
 
   return (
-    !editable?
-      <Button 
-        variant="contained" 
-        color="primary"
-        onClick = {() => setEditable(true)}
-      >
-        Add Item
-      </Button> 
-    :
-      <>
-        <TextField 
-          id="name" 
-          label="Item Name" 
-          type="search" 
-          value = {name}
-          onChange = {e => setName(e.target.value)}
-          variant="outlined" 
-        />
-        <Button 
-          variant="contained" 
-          color="primary"
-          onClick = {toggleClick}
-        >
-          Add Item
-        </Button> 
-      </>
+    <Button 
+      variant="contained" 
+      color="secondary"
+      onClick = {toggleClick}
+    >
+      Add Item
+    </Button> 
 
   )
 

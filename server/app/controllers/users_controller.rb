@@ -13,6 +13,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    if params[:password]
+      if @user.update(user_params)
+        render json: {user: @user.name}, status: :ok
+      end
+    else  
+      @user.update(name: params[:name])
+      render json: {user: @user.name}, status: :ok
+    end
+  end
+
   def random_name
     render json: {name: User.get_random_name}, status: :ok
   end

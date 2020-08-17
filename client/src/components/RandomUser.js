@@ -29,7 +29,6 @@ const RandomUser = ({state, logIn}) => {
     })
       .then(res => res.json())
       .then(userInfo => {
-        debugger
         if (userInfo.token){
           logIn(userInfo)
         }

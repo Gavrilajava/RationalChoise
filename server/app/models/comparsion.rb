@@ -5,14 +5,13 @@ class Comparsion < ApplicationRecord
   has_many :values, through: :items
   has_many :criteria, dependent: :destroy
 
-  def self.to_frontend(id)
-    # Static method used to get all connected data with one request
-    me = Comparsion.where(id: id).includes(:items, :criteria, :values)[0]
+  def to_frontend
     {
-      id: me.id,
-      name: me.name,
-      items: me.items.includes(:criteria, :values),
-      criteria: me.criteria
+      id: self.id,
+      name: self.name,
+      items: self.items.order(:id),
+      criteria: self.criteria.order(:id),
+      values: self.values.order(:id)
     }
   end
 end

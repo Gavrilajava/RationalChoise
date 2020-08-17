@@ -23,8 +23,8 @@ class CriteriaController < ApplicationController
 
   def update
     if @criterium
-      @criterium.update(strong_params)
-      render json: criterium, status: :ok
+      @criterium.update(name: params[:name])
+      render json: @criterium, status: :ok
     else
       render json: {error: "can't find criterium with id " + params[:id]}, status: :not_acceptable
     end

@@ -18,7 +18,12 @@ export default function UserReducer(state = initialUser(),action){
               ...state,
               user: action.auth.user
           }
-
+      case 'setName':
+        localStorage.username = action.username
+        return{
+          ...state,
+          user: action.username
+        }
       default: 
           return state
   }
