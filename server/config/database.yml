@@ -81,5 +81,9 @@ test:
 production:
   <<: *default
   database: rational_choise_api_production
-  username: server
-  password: <%= ENV['SERVER_DATABASE_PASSWORD'] %>
+  username: rails_dev
+  password: aqwe123
+  host: localhost
+  port: 5432
+  pool: 60
+  timeout: 10000
