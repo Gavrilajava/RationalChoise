@@ -15,4 +15,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /server/config/master.key
-/server/.env
+# /server/.env
+
+.deploy_manual

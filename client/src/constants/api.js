@@ -1,4 +1,5 @@
-export const API_ROOT = 'http://localhost:3000';
+// export const API_ROOT = 'http://localhost:3000';
+export const API_ROOT = 'https://thawing-tundra-78986.herokuapp.com'
 export const get_headers = () => {
   if (localStorage.token) {
   return ({  
