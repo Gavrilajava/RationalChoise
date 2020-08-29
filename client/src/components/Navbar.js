@@ -85,6 +85,7 @@ const Navbar = ({ user, logOut, activeComparsion, changeComparsion, comparsions,
         </IconButton>
         <Menu
           id="comparsions-menu"
+          key = {`menu${comparsions.length}`}
           anchorEl={comparsionMenuAnchor}
           keepMounted
           open={Boolean(comparsionMenuAnchor)}
