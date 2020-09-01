@@ -10,7 +10,7 @@ The web app to compare things by several criteria.
 * [Redux](https://redux.js.org/) - Used to store
 
 ## Demo
-Live demo could bee seen [there:](https://rationalchoise.netlify.app/)
+Live demo could be seen [there:](https://rationalchoise.netlify.app/)
 
 ## To get started
 * install ruby and [rvm](https://rvm.io/rvm/install)

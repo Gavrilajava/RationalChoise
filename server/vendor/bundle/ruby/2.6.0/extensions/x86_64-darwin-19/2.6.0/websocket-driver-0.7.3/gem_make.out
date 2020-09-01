@@ -1,0 +1,15 @@
+current directory: /Users/gavrilchik/Development/RationalChoise/server/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+/Users/gavrilchik/.rvm/rubies/ruby-2.6.1/bin/ruby -I /Users/gavrilchik/.rvm/rubies/ruby-2.6.1/lib/ruby/site_ruby/2.6.0 -r ./siteconf20200901-80071-19lts4y.rb extconf.rb
+creating Makefile
+
+current directory: /Users/gavrilchik/Development/RationalChoise/server/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /Users/gavrilchik/Development/RationalChoise/server/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.bundle
+
+current directory: /Users/gavrilchik/Development/RationalChoise/server/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 websocket_mask.bundle ./.gem.20200901-80071-h4bczh
