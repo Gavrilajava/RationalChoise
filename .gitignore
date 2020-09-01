@@ -18,3 +18,5 @@
 /server/.env
 
 .deploy_manual
+
+/server/vendor
