@@ -78,3 +78,5 @@ RandomUser.propTypes = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RandomUser)
+
+

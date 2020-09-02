@@ -16,7 +16,7 @@ RSpec.describe User, :type => :model do
   end
   describe '.get_random_name' do
     it "return random name contains of letters and spaces" do
-      expect(User.get_random_name).to match(/^[a-zA-Z\s]*$/)
+      expect(User.get_random_name+".").to match(/^[a-zA-Z\.\s]*$/)
     end
     it "random names are not yet used" do
       name = User.get_random_name
@@ -33,5 +33,9 @@ RSpec.describe User, :type => :model do
       expect(user.comparsion_names.find{|c| c[0] == comp2.name}).to_not eq(nil)
       expect(user.comparsion_names.find{|c| c[0] == comp2.name}).to_not eq(comp2.id)
     end
+  end
+  after(:all) do
+    User.destroy_all
+    Comparsion.destroy_all
   end
 end

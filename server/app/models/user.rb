@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  has_many :comparsions
+  has_many :comparsions, dependent: :destroy
   has_secure_password
 
   validates :name, presence: true, uniqueness: true

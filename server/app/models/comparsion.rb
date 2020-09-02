@@ -5,6 +5,8 @@ class Comparsion < ApplicationRecord
   has_many :values, through: :items
   has_many :criteria, dependent: :destroy
 
+  validates :name, presence: true, uniqueness: { scope: :user, message: "You need to name comparisons differently to differ them in some way." }
+
   def to_frontend
     {
       id: self.id,
