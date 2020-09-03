@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_secure_password
 
   validates :name, presence: true, uniqueness: true
-  
+
   def comparsion_names
     self.comparsions.pluck(:name, :id)
   end

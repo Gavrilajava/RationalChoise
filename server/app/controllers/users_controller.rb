@@ -5,8 +5,7 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
-    if user.valid?
-      user.save
+    if user.save
       render json: {user: user.name, token: encode_token({user_id: user.id})}, status: :created
     else
       render json: {error: "Failed to create a user"}, status: :not_acceptable
@@ -18,7 +17,7 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         render json: {user: @user.name}, status: :ok
       end
-    else  
+    else
       @user.update(name: params[:name])
       render json: {user: @user.name}, status: :ok
     end

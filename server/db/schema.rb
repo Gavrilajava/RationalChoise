@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_10_205636) do
+ActiveRecord::Schema.define(version: 2020_09_03_173107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2020_08_10_205636) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_comparsions_on_user_id"
   end
 
   create_table "criteria", force: :cascade do |t|
@@ -28,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_08_10_205636) do
     t.integer "comparsion_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["comparsion_id"], name: "index_criteria_on_comparsion_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -35,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_08_10_205636) do
     t.integer "comparsion_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["comparsion_id"], name: "index_items_on_comparsion_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,6 +54,8 @@ ActiveRecord::Schema.define(version: 2020_08_10_205636) do
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["criterium_id"], name: "index_values_on_criterium_id"
+    t.index ["item_id"], name: "index_values_on_item_id"
   end
 
 end
