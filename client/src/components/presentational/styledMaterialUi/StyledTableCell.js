@@ -1,4 +1,3 @@
-
 import { withStyles } from '@material-ui/core/styles'
 import TableCell from '@material-ui/core/TableCell'
 import teal from '@material-ui/core/colors/teal'

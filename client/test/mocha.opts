@@ -1,0 +1,7 @@
+--require @babel/register
+--require ./test/helpers.js 
+--require ./test/dom.js 
+--require ignore-styles
+--no-deprecation
+--timeout 5000
+--bail
