@@ -1,10 +1,11 @@
 import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
-import ContentEditable from 'react-contenteditable'
-import { API_ROOT, getHeaders, throwError } from '../constants/api'
+import ValueCell from '../presentational/ValueCell'
+import { API_ROOT, getHeaders, throwError } from '../../constants/api'
 import { connect } from 'react-redux'
 
-const Value = ({ itemId, criteriumId, value = { value: 'Add Value!' }, StyledTableCell, addNewValue }) => {
+const ValueContainer = ({ itemId, criteriumId, value = { value: 'Add Value!' }, StyledTableCell, addNewValue }) => {
+
   const text = useRef(value.value)
 
   const handleChange = e => {
@@ -16,7 +17,6 @@ const Value = ({ itemId, criteriumId, value = { value: 'Add Value!' }, StyledTab
 
   const handleBlur = e => {
     e.target.innerText = text.current
-
     fetch(API_ROOT + '/values', {
       method: 'POST',
       headers: getHeaders(),
@@ -45,20 +45,15 @@ const Value = ({ itemId, criteriumId, value = { value: 'Add Value!' }, StyledTab
   }
 
   return (
-    <StyledTableCell
-      align="right"
+    <ValueCell
       key = {`cell${itemId}Х${criteriumId}`}
-    >
-      <ContentEditable
-        html={text.current}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        onFocus={handleFocus}
-        onKeyDown = {handleKeyDown}
-        style = {isNaN(text.current) ? { color: 'red' } : {} }
-      />
-    </StyledTableCell>
-
+      html={text.current}
+      onBlur={handleBlur}
+      onChange={handleChange}
+      onFocus={handleFocus}
+      onKeyDown = {handleKeyDown}
+      style = {isNaN(text.current) ? { color: 'red' } : {} }
+    />
   )
 }
 
@@ -72,7 +67,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-Value.propTypes = {
+ValueContainer.propTypes = {
   itemId: PropTypes.number.isRequired,
   criteriumId: PropTypes.number.isRequired,
   value: PropTypes.string.isRequired,
@@ -80,4 +75,4 @@ Value.propTypes = {
   StyledTableCell: PropTypes.element.isRequired
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Value)
+export default connect(mapStateToProps, mapDispatchToProps)(ValueContainer)

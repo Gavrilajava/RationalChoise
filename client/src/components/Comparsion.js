@@ -5,15 +5,14 @@ import { API_ROOT, getHeaders, throwError } from '../constants/api'
 import { withStyles, makeStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import teal from '@material-ui/core/colors/teal'
+import StyledTableCell from './presentational/styledMaterialUi/StyledTableCell'
 import { Redirect } from 'react-router-dom'
-import Value from './Value'
+import ValueContainer from './containers/ValueContainer'
 import Header from './Header'
 
 const Comparsion = ({
@@ -57,17 +56,7 @@ const Comparsion = ({
       .catch((e) => setErrors(e))
   }, [activeComparsion, comparsions.length, id, setActiveComparsion, setComparsionDetails, setComparsions])
 
-  const StyledTableCell = withStyles((theme) => ({
-    head: {
-      backgroundColor: teal[500],
-      color: theme.palette.common.white
 
-    },
-    body: {
-      fontSize: 14,
-      width: 'auto'
-    }
-  }))(TableCell)
 
   const StyledTableRow = withStyles((theme) => ({
     root: {
@@ -172,7 +161,7 @@ const Comparsion = ({
                   </StyledTableCell>
 
                   { criteria.map(crit =>
-                    <Value
+                    <ValueContainer
                       key = {`val${item.id}Х${crit.id}`}
                       StyledTableCell = {StyledTableCell}
                       itemId = {item.id}
