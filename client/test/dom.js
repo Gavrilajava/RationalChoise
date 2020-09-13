@@ -2,7 +2,7 @@
 
 const { JSDOM }= require('jsdom')
  
-const { window } = new JSDOM('<!doctype html><html><body></body></html>');
+const { window } = new JSDOM('<!doctype html><html><body><div id="root"></div></body></html>');
  
 function copyProps(src, target) {
   const props = Object.getOwnPropertyNames(src)
@@ -19,5 +19,6 @@ global.document = window.document;
 global.navigator = {
   userAgent: 'node.js',
 };
+global.root = window.document.getElementById('root')
  
 copyProps(window, global);

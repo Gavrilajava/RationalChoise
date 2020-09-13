@@ -35,5 +35,5 @@ ValueCell.propTypes = {
   onChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func.isRequired,
   onKeyDown: PropTypes.func.isRequired,
-  style: PropTypes.string,
+  style: PropTypes.object,
 }
