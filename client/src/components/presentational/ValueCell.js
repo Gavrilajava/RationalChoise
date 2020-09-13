@@ -5,7 +5,7 @@ import StyledTableCell from './styledMaterialUi/StyledTableCell'
 
 const ValueCell = props => {
 
-  const { html, 
+  const { children, 
           handleBlur, 
           handleChange, 
           handleFocus, 
@@ -16,7 +16,7 @@ const ValueCell = props => {
   return (
     <StyledTableCell align="right">
       <ContentEditable
-        html={html}
+        html={children}
         onBlur={handleBlur}
         onChange={handleChange}
         onFocus={handleFocus}
@@ -30,7 +30,7 @@ const ValueCell = props => {
 export default ValueCell
 
 ValueCell.propTypes = {
-  html: PropTypes.string,
+  children: PropTypes.string,
   onBlur: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func.isRequired,

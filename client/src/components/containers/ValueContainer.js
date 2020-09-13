@@ -47,13 +47,14 @@ const ValueContainer = ({ itemId, criteriumId, value = { value: 'Add Value!' }, 
   return (
     <ValueCell
       key = {`cell${itemId}Х${criteriumId}`}
-      html={text.current}
       onBlur={handleBlur}
       onChange={handleChange}
       onFocus={handleFocus}
       onKeyDown = {handleKeyDown}
       style = {isNaN(text.current) ? { color: 'red' } : {} }
-    />
+    >
+      {text.current}
+    </ValueCell>
   )
 }
 
